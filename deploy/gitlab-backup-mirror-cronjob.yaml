@@ -27,5 +27,5 @@ spec:
                       name: gitlab-minio-secret
               envFrom:
                 - secretRef:
-                  name: gitlab-backup-mirror
+                    name: gitlab-backup-mirror
           restartPolicy: Never
