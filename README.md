@@ -7,6 +7,10 @@
 
 Useful for GitLab backup mirroring between different MinIO instances.
 
+## Deployment
+
+Please refer to the example deployment in the `deploy/` directory of this repository.
+
 ## Variables
 
 This image takes the following variables (all vars are required):
