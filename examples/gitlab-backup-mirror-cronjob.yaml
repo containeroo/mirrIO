@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: &app_name gitlab-backup-mirror
+  name: gitlab-backup-mirror
 spec:
   schedule: '0 2 * * *'
   failedJobsHistoryLimit: 3
@@ -12,14 +12,9 @@ spec:
       template:
         spec:
           containers:
-            - name: *app_name
+            - name: gitlab-backup-mirror
               image: containeroo/gitlab-backup-mirror:1.0.0
               env:
-                - name: GITLAB_MINIO_URL
-                  valueFrom:
-                    secretKeyRef:
-                      key: gitlab-minio-url
-                      name: gitlab-backup-mirror-secret
                 - name: GITLAB_MINIO_ACCESSKEY
                   valueFrom:
                     secretKeyRef:
@@ -30,24 +25,7 @@ spec:
                     secretKeyRef:
                       key: secretkey
                       name: gitlab-minio-secret
-                - name: BACKUP_MINIO_URL
-                  valueFrom:
-                    secretKeyRef:
-                      key: backup-minio-url
-                      name: gitlab-backup-mirror-secret
-                - name: BACKUP_MINIO_ACCESSKEY
-                  valueFrom:
-                    secretKeyRef:
-                      key: backup-minio-accesskey
-                      name: gitlab-backup-mirror-secret
-                - name: BACKUP_MINIO_SECRETKEY
-                  valueFrom:
-                    secretKeyRef:
-                      key: backup-minio-secretkey
-                      name: gitlab-backup-mirror-secret
-                - name: GITLAB_BACKUP_RETENTION
-                  valueFrom:
-                    secretKeyRef:
-                      key: gitlab-backup-retention
-                      name: gitlab-backup-mirror-secret
+              envFrom:
+                - secretRef:
+                  name: gitlab-backup-mirror
           restartPolicy: Never
