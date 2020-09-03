@@ -3,6 +3,7 @@
 set -o errexit
 
 bucketname=${BACKUP_MINIO_BUCKET_NAME:-gitlab}
+reten
 
 mc config host add gitlab ${GITLAB_MINIO_URL} ${GITLAB_MINIO_ACCESSKEY} ${GITLAB_MINIO_SECRETKEY} --api S3v4
 
@@ -12,4 +13,4 @@ mc mb --ignore-existing backup/gitlab
 
 mc rm --force --recursive --dangerous --older-than ${GITLAB_BACKUP_RETENTION} gitlab/gitlab-backups
 
-mc mirror gitlab/gitlab-backups backup/"${bucketname}" --remove
+mc mirror gitlab/gitlab-backups backup/${bucketname} --remove
