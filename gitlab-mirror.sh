@@ -2,7 +2,7 @@
 
 set -o errexit
 
-bucketname=${BACKUP_BUCKET_NAME:-gitlab}
+bucketname=${BACKUP_MINIO_BUCKET_NAME:-gitlab}
 
 mc config host add gitlab ${GITLAB_MINIO_URL} ${GITLAB_MINIO_ACCESSKEY} ${GITLAB_MINIO_SECRETKEY} --api S3v4
 
