@@ -13,7 +13,7 @@ spec:
         spec:
           containers:
             - name: gitlab-backup-mirror
-              image: containeroo/gitlab-backup-mirror:1.0.0
+              image: containeroo/gitlab-backup-mirror:1.1.0
               env:
                 - name: GITLAB_MINIO_ACCESSKEY
                   valueFrom:
