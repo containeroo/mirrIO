@@ -1,3 +1,4 @@
+---
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
@@ -25,6 +26,9 @@ spec:
                     secretKeyRef:
                       key: secretkey
                       name: gitlab-minio-secret
+                # optional
+                # - name: PUSHGATEWAY_URL
+                #   value: http://prometheus-pushgateway.monitoring.svc.cluster.local:9091
               envFrom:
                 - secretRef:
                     name: gitlab-backup-mirror
