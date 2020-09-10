@@ -1,0 +1,19 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    prometheus: default
+  name: gitlab-backup-mirror-rule
+  namespace: monitoring
+spec:
+  groups:
+  - name: gitlab-backup-mirror
+    rules:
+    - alert: GitlabBackupMirrorSyncError
+      annotations:
+        description: This alert is fired when sync fails
+        summary: Whether the snyc failed
+      expr: gbm_sync_failed > 0
+      labels:
+        severity: warning
