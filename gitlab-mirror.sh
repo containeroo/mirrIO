@@ -26,7 +26,7 @@ mc config host add gitlab ${GITLAB_MINIO_URL} ${GITLAB_MINIO_ACCESSKEY} ${GITLAB
 
 mc config host add backup ${BACKUP_MINIO_URL} ${BACKUP_MINIO_ACCESSKEY} ${BACKUP_MINIO_SECRETKEY} --api S3v4
 
-mc mb --ignore-existing backup/gitlab
+mc mb --ignore-existing backup/${bucketname}
 
 mc rm --force --recursive --dangerous --older-than ${retention} gitlab/gitlab-backups
 
