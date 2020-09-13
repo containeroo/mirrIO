@@ -6,20 +6,18 @@ bucketname=${BACKUP_MINIO_BUCKET_NAME:-gitlab}
 retention=${GITLAB_BACKUP_RETENTION:-30d0h0m}
 
 function pushgateway {
-if [ -n "${PUSHGATEWAY_URL}" ]; then
-
-cat <<EOF | curl -L --data-binary @- ${PUSHGATEWAY_URL}/metrics/job/gitlab-backup-mirror/instance/sync
-# TYPE gbm_sync_failed gauge
-# HELP gbm_sync_failed Whether the snyc failed
-gbm_sync_failed $1
-EOF
-
-fi
+    if [ -n "${PUSHGATEWAY_URL}" ]; then
+		cat <<-EOF | curl --silent --show-error --data-binary @- ${PUSHGATEWAY_URL}/metrics/job/gitlab-backup-mirror/instance/sync > /dev/null
+			# TYPE gbm_sync_failed gauge
+			# HELP gbm_sync_failed Whether the snyc failed
+			gbm_sync_failed $1
+			EOF
+    fi
 }
 
 function notify {
-pushgateway 1
-echo "ERROR: cannot sync"
+	pushgateway 1
+	echo "ERROR: Unable to sync!"
 }
 
 trap notify ERR
