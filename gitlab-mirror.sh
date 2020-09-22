@@ -26,7 +26,7 @@ mc config host add gitlab ${GITLAB_MINIO_URL} ${GITLAB_MINIO_ACCESSKEY} ${GITLAB
 
 mc config host add backup ${BACKUP_MINIO_URL} ${BACKUP_MINIO_ACCESSKEY} ${BACKUP_MINIO_SECRETKEY} --api S3v4
 
-mc mb --ignore-existing backup/${BACKUP_MINIO_BUCKET_NAME}
+mc ls backup | grep -q ${BACKUP_MINIO_BUCKET_NAME} || mc mb backup/${BACKUP_MINIO_BUCKET_NAME}
 
 [[ -n $(mc ls gitlab/gitlab-backups) ]] && mc rm --force --recursive --dangerous --older-than ${GITLAB_BACKUP_RETENTION} gitlab/gitlab-backups
 
