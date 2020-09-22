@@ -2,8 +2,8 @@
 
 set -o errexit
 
-bucketname=${BACKUP_MINIO_BUCKET_NAME:-gitlab}
-retention=${GITLAB_BACKUP_RETENTION:-30d0h0m}
+BACKUP_MINIO_BUCKET_NAME=${BACKUP_MINIO_BUCKET_NAME:-gitlab}
+GITLAB_BACKUP_RETENTION=${GITLAB_BACKUP_RETENTION:-30d0h0m}
 
 function pushgateway {
     if [ -n "${PUSHGATEWAY_URL}" ]; then
@@ -26,10 +26,10 @@ mc config host add gitlab ${GITLAB_MINIO_URL} ${GITLAB_MINIO_ACCESSKEY} ${GITLAB
 
 mc config host add backup ${BACKUP_MINIO_URL} ${BACKUP_MINIO_ACCESSKEY} ${BACKUP_MINIO_SECRETKEY} --api S3v4
 
-mc mb --ignore-existing backup/${bucketname}
+mc mb --ignore-existing backup/${BACKUP_MINIO_BUCKET_NAME}
 
-mc rm --force --recursive --dangerous --older-than ${retention} gitlab/gitlab-backups
+[[ -n $(mc ls backup/${BACKUP_MINIO_BUCKET_NAME}) ]] && mc rm --force --recursive --dangerous --older-than ${GITLAB_BACKUP_RETENTION} gitlab/gitlab-backups
 
-mc mirror gitlab/gitlab-backups backup/${bucketname} --remove
+mc mirror gitlab/gitlab-backups backup/${BACKUP_MINIO_BUCKET_NAME} --remove
 
 pushgateway 0
