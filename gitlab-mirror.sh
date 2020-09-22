@@ -28,7 +28,7 @@ mc config host add backup ${BACKUP_MINIO_URL} ${BACKUP_MINIO_ACCESSKEY} ${BACKUP
 
 mc mb --ignore-existing backup/${BACKUP_MINIO_BUCKET_NAME}
 
-[[ -n $(mc ls backup/${BACKUP_MINIO_BUCKET_NAME}) ]] && mc rm --force --recursive --dangerous --older-than ${GITLAB_BACKUP_RETENTION} gitlab/gitlab-backups
+[[ -n $(mc ls gitlab/gitlab-backups) ]] && mc rm --force --recursive --dangerous --older-than ${GITLAB_BACKUP_RETENTION} gitlab/gitlab-backups
 
 mc mirror gitlab/gitlab-backups backup/${BACKUP_MINIO_BUCKET_NAME} --remove
 
