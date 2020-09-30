@@ -12,8 +12,8 @@ spec:
     rules:
     - alert: GitlabBackupMirrorSyncError
       annotations:
-        description: This alert is fired when sync fails
-        summary: Whether the snyc failed
+        description: This alert is fired when the last sync failed
+        summary: Whether the last sync failed
       expr: gbm_sync_failed > 0
       labels:
         severity: warning

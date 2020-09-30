@@ -9,7 +9,7 @@ function pushgateway {
     if [ -n "${PUSHGATEWAY_URL}" ]; then
 		cat <<-EOF | curl --silent --show-error --data-binary @- ${PUSHGATEWAY_URL}/metrics/job/gitlab-backup-mirror/instance/sync > /dev/null
 			# TYPE gbm_sync_failed gauge
-			# HELP gbm_sync_failed Whether the snyc failed
+			# HELP gbm_sync_failed Whether the last sync failed
 			gbm_sync_failed $1
 			EOF
     fi
