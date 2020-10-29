@@ -5,8 +5,8 @@ RUN \
     curl https://dl.min.io/client/mc/release/linux-amd64/mc > /usr/bin/mc && \
     chmod +x /usr/bin/mc
 
-ADD gitlab-mirror.sh /gitlab-mirror.sh
+ADD mirrio.sh /mirrio.sh
 
-RUN chmod +x /gitlab-mirror.sh
+RUN chmod +x /mirrio.sh
 
-ENTRYPOINT ["/gitlab-mirror.sh"]
+ENTRYPOINT ["/mirrio.sh"]

@@ -2,7 +2,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: gitlab-backup-mirror
+  name: mirrio
 spec:
   schedule: '0 2 * * *'
   failedJobsHistoryLimit: 3
@@ -13,15 +13,15 @@ spec:
       template:
         spec:
           containers:
-            - name: gitlab-backup-mirror
-              image: containeroo/gitlab-backup-mirror:1.1.0
+            - name: mirrio
+              image: containeroo/mirrio:latest
               env:
-                - name: GITLAB_MINIO_ACCESSKEY
+                - name: SOURCE_ACCESSKEY
                   valueFrom:
                     secretKeyRef:
                       key: accesskey
                       name: gitlab-minio-secret
-                - name: GITLAB_MINIO_SECRETKEY
+                - name: SOURCE_SECRETKEY
                   valueFrom:
                     secretKeyRef:
                       key: secretkey
@@ -31,5 +31,5 @@ spec:
                 #   value: http://prometheus-pushgateway.monitoring.svc.cluster.local:9091
               envFrom:
                 - secretRef:
-                    name: gitlab-backup-mirror
+                    name: mirrio
           restartPolicy: Never

@@ -4,16 +4,16 @@ kind: PrometheusRule
 metadata:
   labels:
     prometheus: default
-  name: gitlab-backup-mirror-rule
+  name: mirrio-rule
   namespace: monitoring
 spec:
   groups:
-  - name: gitlab-backup-mirror
+  - name: mirrio
     rules:
-    - alert: GitlabBackupMirrorSyncError
+    - alert: mirrIO Sync Error
       annotations:
-        description: This alert is fired when the last sync failed
+        description: This alert is fired when mirrIO failed to sync buckets
         summary: Whether the last sync failed
-      expr: gbm_sync_failed > 0
+      expr: mirrio_sync_failed > 0
       labels:
         severity: warning
