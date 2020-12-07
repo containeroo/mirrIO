@@ -2,18 +2,16 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  labels:
-    prometheus: default
-  name: mirrio-rule
+  name: mirrio
   namespace: monitoring
 spec:
   groups:
-  - name: mirrio
-    rules:
-    - alert: mirrIO Sync Error
-      annotations:
-        description: This alert is fired when mirrIO failed to sync buckets
-        summary: Whether the last sync failed
-      expr: mirrio_sync_failed > 0
-      labels:
-        severity: warning
+    - name: mirrio
+      rules:
+        - alert: mirrIOSyncError
+          annotations:
+            description: The mirrIO job {{ $labels.instance }} failed.
+            summary: mirrIO sync failed.
+          expr: mirrio_sync_failed > 0
+          labels:
+            severity: warning

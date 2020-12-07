@@ -12,7 +12,7 @@ Please refer to the example deployment in the `deploy/` directory of this reposi
 
 ## Variables
 
-This image takes the following variables (all vars are required):
+mirrIO takes the following environment variables:
 
 | Variable                | Description                                         | Example                                                           |
 |-------------------------|-----------------------------------------------------|-------------------------------------------------------------------|
