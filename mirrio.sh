@@ -7,7 +7,7 @@ RETENTION=${RETENTION:-30d0h0m}
 
 function pushgateway {
 	if [[ -n "${PUSHGATEWAY_URL}" ]]; then
-		cat <<-EOF | curl --silent --show-error --data-binary @- ${PUSHGATEWAY_URL}/metrics/job/mirrio/instance/${JOB_NAME} > /dev/null
+		cat <<-EOF | curl --retry 3 --max-time 5 --silent --show-error --data-binary @- ${PUSHGATEWAY_URL}/metrics/job/mirrio/instance/${JOB_NAME} > /dev/null
 			# TYPE mirrio_sync_failed gauge
 			# HELP mirrio_sync_failed Whether the last sync failed
 			mirrio_sync_failed $1
