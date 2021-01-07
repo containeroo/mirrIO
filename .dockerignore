@@ -1,0 +1,6 @@
+deploy
+.git
+.gitignore
+.github
+.gitattributes
+README.md
