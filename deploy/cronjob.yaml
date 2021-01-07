@@ -14,7 +14,7 @@ spec:
         spec:
           containers:
             - name: mirrio
-              image: containeroo/mirrio:latest
+              image: ghcr.io/containeroo/mirrio:latest
               env:
                 - name: SOURCE_ACCESSKEY
                   valueFrom:
