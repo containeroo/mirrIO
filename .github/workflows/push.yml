@@ -14,6 +14,6 @@ jobs:
         with:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
-          repository: containeroo/mirrio/mirrio
+          registry: ghcr.io
+          repository: containeroo/mirrio
           tag_with_ref: true
