@@ -39,6 +39,6 @@ mc ls destination | grep -q ${DESTINATION_BUCKET} || mc mb destination/${DESTINA
 
 [[ -n $(mc ls source/${SOURCE_BUCKET}) ]] && mc rm --force --recursive --dangerous --older-than ${RETENTION} source/${SOURCE_BUCKET}
 
-mc mirror source/${SOURCE_BUCKET} destination/${DESTINATION_BUCKET} --remove
+mc mirror source/${SOURCE_BUCKET} destination/${DESTINATION_BUCKET} --remove ${ADDITIONAL_PARAMETERS}
 
 pushgateway 0
