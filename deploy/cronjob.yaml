@@ -26,6 +26,8 @@ spec:
                     secretKeyRef:
                       key: secretkey
                       name: gitlab-minio-secret
+                - name: ADDITIONAL_PARAMETERS
+                  value: --debug --force
                 # optional
                 # - name: PUSHGATEWAY_URL
                 #   value: http://prometheus-pushgateway.monitoring.svc.cluster.local:9091
