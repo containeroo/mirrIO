@@ -1,8 +1,8 @@
 # Changelog
 
-## [v2.0.4](https://github.com/containeroo/mirrIO/tree/v2.0.4) (2021-04-03)
+## [v2.1.0](https://github.com/containeroo/mirrIO/tree/v2.1.0) (2021-04-03)
 
-[All Commits](https://github.com/containeroo/mirrIO/compare/v2.0.3...v2.0.4)
+[All Commits](https://github.com/containeroo/mirrIO/compare/v2.0.3...v2.1.0)
 
 **New features:**
 
