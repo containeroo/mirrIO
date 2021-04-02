@@ -9,6 +9,10 @@
 - Add variable `ADDITIONAL_PARAMETERS`
 - Add changelog
 
+**Removed:**
+
+- Remove multi arch docker image build since there is no mc binary available for other platforms
+
 ## [v2.0.3](https://github.com/containeroo/mirrIO/tree/v2.0.3) (2021-01-11)
 
 [All Commits](https://github.com/containeroo/mirrIO/compare/v2.0.2...v2.0.3)
