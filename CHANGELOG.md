@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.1.1](https://github.com/containeroo/mirrIO/tree/v2.1.1) (2021-07-23)
+
+[All Commits](https://github.com/containeroo/mirrIO/compare/v2.1.0...v2.1.1)
+
+**other:**
+
+- fix alpine version
+
 ## [v2.1.0](https://github.com/containeroo/mirrIO/tree/v2.1.0) (2021-04-03)
 
 [All Commits](https://github.com/containeroo/mirrIO/compare/v2.0.3...v2.1.0)
