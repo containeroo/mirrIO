@@ -6,7 +6,7 @@
 
 **other:**
 
-- update minIO client version to RELEASE.2021-09-23T05-44-03Z
+- update minIO client to RELEASE.2021-09-23T05-44-03Z
 
 ## [v2.1.2](https://github.com/containeroo/mirrIO/tree/v2.1.2) (2021-08-31)
 
