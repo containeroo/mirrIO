@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.2.0](https://github.com/containeroo/mirrIO/tree/v2.2.0) (2021-11-28)
+
+[All Commits](https://github.com/containeroo/mirrIO/compare/v2.1.4...v2.2.0)
+
+**other:**
+
+- update alpine to 3.15.0
+
 ## [v2.1.4](https://github.com/containeroo/mirrIO/tree/v2.1.4) (2021-11-14)
 
 [All Commits](https://github.com/containeroo/mirrIO/compare/v2.1.3...v2.1.4)
