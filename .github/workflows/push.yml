@@ -35,6 +35,12 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
+          labels: |
+            org.opencontainers.image.title=mirrIO
+            org.opencontainers.image.description=mirrIO
+            org.opencontainers.image.url=https://github.com/containeroo/mirrio
+            org.opencontainers.image.source=https://github.com/containeroo/mirrio
+            org.opencontainers.image.version=${{ steps.tag.outputs.version }}
           tags: |
             containeroo/mirrio:latest
             containeroo/mirrio:${{ steps.tag.outputs.version }}
