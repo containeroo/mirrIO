@@ -1,9 +1,9 @@
 FROM alpine:3.15.2
 
 RUN \
-    apk add --no-cache ca-certificates bash curl && \
-    curl https://dl.min.io/client/mc/release/linux-amd64/mc > /usr/bin/mc && \
-    chmod +x /usr/bin/mc
+  apk add --no-cache ca-certificates bash curl && \
+  curl https://dl.min.io/client/mc/release/linux-amd64/mc > /usr/bin/mc && \
+  chmod +x /usr/bin/mc
 
 ADD mirrio.sh /mirrio.sh
 
