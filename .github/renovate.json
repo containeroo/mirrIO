@@ -1,4 +1,4 @@
 {
   "extends": ["config:base"],
-  "labels": ["renovate/{{datasource}}","{{updateType}}"]
+  "labels": ["dependency"]
 }
