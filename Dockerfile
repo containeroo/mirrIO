@@ -1,7 +1,7 @@
 FROM alpine:3.16.2
 
 # renovate: datasource=github-releases depName=minio/mc
-ARG MC_VERSION=RELEASE.2022-10-29T10-09-23Z
+ARG MC_VERSION=RELEASE.2022-11-07T23-47-39Z
 
 RUN \
   apk add --no-cache ca-certificates bash curl && \
