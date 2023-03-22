@@ -4,6 +4,7 @@ set -o errexit
 
 JOB_NAME=${JOB_NAME:-mirrIO}
 RETENTION=${RETENTION:-30d0h0m}
+ADDITIONAL_PARAMETERS=${ADDITIONAL_PARAMETERS:---quiet}
 
 function pushgateway {
 	if [[ -n "${PUSHGATEWAY_URL}" ]]; then
