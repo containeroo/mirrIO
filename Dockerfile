@@ -1,4 +1,4 @@
-FROM alpine:3.17.2
+FROM alpine:3.17.3
 
 # renovate: datasource=github-releases depName=minio/mc
 ARG MC_VERSION=RELEASE.2023-03-20T17-17-53Z
