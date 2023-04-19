@@ -43,6 +43,7 @@ jobs:
 
       - name: Sync buckets
         run: |
+          docker ps
           docker run \
             -e SOURCE_URL=http://localhost:9000 \
             -e SOURCE_ACCESSKEY=minio \
