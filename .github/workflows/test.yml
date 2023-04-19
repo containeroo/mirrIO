@@ -44,6 +44,8 @@ jobs:
       - name: Sync buckets
         run: |
           docker ps
+          mc ls minio1/source
+          mc ls minio2/destination
           docker run \
             -e SOURCE_URL=http://localhost:9000 \
             -e SOURCE_ACCESSKEY=minio \
