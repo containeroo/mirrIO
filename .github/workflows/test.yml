@@ -40,4 +40,4 @@ jobs:
 
       - name: Sync buckets
         run: |
-          docker run -e SOURCE_URL=localhost:9000 -e SOURCE_ACCESSKEY=minio -e SOURCE_SECRETKEY=minio123 -e DESTINATION_URL=localhost:9001 -e DESTINATION_ACCESSKEY=minio -e DESTINATION_SECRETKEY=minio123 -e SOURCE_BUCKET=minio1 -e DESTINATION_BUCKET=minio2 test/mirrio
+          docker run -e SOURCE_URL=http://localhost:9000 -e SOURCE_ACCESSKEY=minio -e SOURCE_SECRETKEY=minio123 -e DESTINATION_URL=http://localhost:9001 -e DESTINATION_ACCESSKEY=minio -e DESTINATION_SECRETKEY=minio123 -e SOURCE_BUCKET=minio1 -e DESTINATION_BUCKET=minio2 test/mirrio
