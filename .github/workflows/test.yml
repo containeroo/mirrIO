@@ -5,9 +5,12 @@ on:
   pull_request:
     types:
       - opened
+  push:
+    branches-ignore:
+      - master
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
 
     steps:
