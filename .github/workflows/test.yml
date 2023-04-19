@@ -2,9 +2,9 @@
 name: Test
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types:
+      - opened
 
 jobs:
   deploy:
@@ -19,6 +19,12 @@ jobs:
           docker build -t test/mirrio .
           docker run -d -p 9000:9000 -e "MINIO_ACCESS_KEY=minio" -e "MINIO_SECRET_KEY=minio123" --name minio1 minio/minio server /data
           docker run -d -p 9001:9000 -e "MINIO_ACCESS_KEY=minio" -e "MINIO_SECRET_KEY=minio123" --name minio2 minio/minio server /data
+
+      - name: Install Minio Client
+        run: |
+          wget https://dl.min.io/client/mc/release/linux-amd64/mc
+          chmod +x mc
+          sudo mv mc /usr/local/bin/
 
       - name: Create test buckets
         run: |
