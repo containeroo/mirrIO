@@ -5,9 +5,12 @@ on:
   pull_request:
     types:
       - opened
+  push:
+    branches-ignore:
+      - master
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,8 +20,9 @@ jobs:
       - name: Set up Minio
         run: |
           docker build -t test/mirrio .
-          docker run -d -p 9000:9000 -e "MINIO_ACCESS_KEY=minio" -e "MINIO_SECRET_KEY=minio123" --name minio1 minio/minio server /data
-          docker run -d -p 9001:9000 -e "MINIO_ACCESS_KEY=minio" -e "MINIO_SECRET_KEY=minio123" --name minio2 minio/minio server /data
+          docker network create minio
+          docker run -d --network minio -p 9000:9000 -e "MINIO_ACCESS_KEY=minio" -e "MINIO_SECRET_KEY=minio123" --name minio1 minio/minio server /data
+          docker run -d --network minio -p 9001:9000 -e "MINIO_ACCESS_KEY=minio" -e "MINIO_SECRET_KEY=minio123" --name minio2 minio/minio server /data
 
       - name: Install Minio Client
         run: |
@@ -40,4 +44,17 @@ jobs:
 
       - name: Sync buckets
         run: |
-          docker run -e SOURCE_URL=localhost:9000 -e SOURCE_ACCESSKEY=minio -e SOURCE_SECRETKEY=minio123 -e DESTINATION_URL=localhost:9001 -e DESTINATION_ACCESSKEY=minio -e DESTINATION_SECRETKEY=minio123 -e SOURCE_BUCKET=minio1 -e DESTINATION_BUCKET=minio2 test/mirrio
+          docker ps
+          mc ls minio1/source
+          mc ls minio2/destination
+          docker run \
+            --network minio \
+            -e SOURCE_URL=http://minio1:9000 \
+            -e SOURCE_ACCESSKEY=minio \
+            -e SOURCE_SECRETKEY=minio123 \
+            -e DESTINATION_URL=http://minio2:9000 \
+            -e DESTINATION_ACCESSKEY=minio \
+            -e DESTINATION_SECRETKEY=minio123 \
+            -e SOURCE_BUCKET=source \
+            -e DESTINATION_BUCKET=destination \
+            test/mirrio
