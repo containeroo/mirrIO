@@ -21,7 +21,7 @@ jobs:
         run: |
           docker build -t test/mirrio .
           docker run -d -p 9000:9000 -e "MINIO_ACCESS_KEY=minio" -e "MINIO_SECRET_KEY=minio123" --name minio1 minio/minio server /data
-          docker run -d -p 9069:9000 -e "MINIO_ACCESS_KEY=minio" -e "MINIO_SECRET_KEY=minio123" --name minio2 minio/minio server /data
+          docker run -d -p 9001:9000 -e "MINIO_ACCESS_KEY=minio" -e "MINIO_SECRET_KEY=minio123" --name minio2 minio/minio server /data
 
       - name: Install Minio Client
         run: |
@@ -32,7 +32,7 @@ jobs:
       - name: Create test buckets
         run: |
           mc config host add minio1 http://localhost:9000 minio minio123
-          mc config host add minio2 http://localhost:9069 minio minio123
+          mc config host add minio2 http://localhost:9001 minio minio123
           mc mb minio1/source
           mc mb minio2/destination
 
@@ -47,10 +47,10 @@ jobs:
           mc ls minio1/source
           mc ls minio2/destination
           docker run \
-            -e SOURCE_URL=http://localhost:9000 \
+            -e SOURCE_URL=http://minio1:9000 \
             -e SOURCE_ACCESSKEY=minio \
             -e SOURCE_SECRETKEY=minio123 \
-            -e DESTINATION_URL=http://localhost:9069 \
+            -e DESTINATION_URL=http://minio2:9001 \
             -e DESTINATION_ACCESSKEY=minio \
             -e DESTINATION_SECRETKEY=minio123 \
             -e SOURCE_BUCKET=source \
