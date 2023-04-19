@@ -2,12 +2,11 @@
 name: Test
 
 on:
-  pull_request:
-    types:
-      - opened
+  pull_request: {}
   push:
-    branches-ignore:
-      - master
+    paths:
+      - mirrio.sh
+      - Dockerfile
 
 jobs:
   test:
