@@ -1,4 +1,4 @@
-FROM minio/mc:RELEASE.2023-06-23T18-12-07Z
+FROM minio/mc:RELEASE.2023-06-28T21-54-17Z
 
 ADD mirrio.sh /mirrio.sh
 
