@@ -1,4 +1,10 @@
-FROM minio/mc:RELEASE.2023-10-24T05-18-28Z
+FROM ghcr.io/containeroo/alpine-toolbox:2.0.56
+
+# renovate: datasource=github-releases depName=minio/mc extractVersion=^RELEASE\\.(?<major>\\d+)-(?<minor>\\d+)-(?<patch>\\d+)T.*Z(-(?<compatibility>.*))?$
+ENV MINIO_VERSION=RELEASE.2023-10-14T01-57-03Z
+
+RUN wget -O /usr/local/bin/mc https://dl.min.io/client/mc/release/linux-amd64/mc && \
+  chmod +x /usr/local/bin/mc
 
 ADD mirrio.sh /mirrio.sh
 
