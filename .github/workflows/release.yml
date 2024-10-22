@@ -11,15 +11,34 @@ jobs:
       - uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
         with:
           fetch-depth: "0"
-      - name: Build changelog from PRs with labels
-        id: build_changelog
+      - name: Build Changelog
         uses: mikepenz/release-changelog-builder-action@v5
         with:
-          configuration: ".github/changelog-configuration.json"
-          # PreReleases still get a changelog, but the next full release gets a diff since the last full release,
-          # combining possible changelogs of all previous PreReleases in between.
-          # PreReleases show a partial changelog since last PreRelease.
-          ignorePreReleases: "${{ !contains(github.ref, '-rc') }}"
+          mode: "COMMIT"
+          configurationJson: |
+            {
+              "template": "#{{CHANGELOG}}",
+              "categories": [
+                {
+                    "title": "## Feature",
+                    "labels": ["feat", "feature"]
+                },
+                {
+                    "title": "## Fix",
+                    "labels": ["fix", "bug"]
+                },
+                {
+                    "title": "## Other",
+                    "labels": []
+                }
+              ],
+              "label_extractor": [
+                {
+                  "pattern": "^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\\([\\w\\-\\.]+\\))?(!)?: ([\\w ])+([\\s\\S]*)",
+                  "target": "$1"
+                }
+              ]
+            }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
