@@ -3,12 +3,18 @@
   "semanticCommits": "enabled",
   "dependencyDashboard": true,
   "separateMajorMinor": false,
-  "labels": ["dependency"],
+  "labels": [
+    "dependency"
+  ],
   "minimumReleaseAge": "1 day",
   "prCreation": "not-pending",
-  "regexManagers": [
+  "customManagers": [
     {
-      "fileMatch": ["(^|/)Dockerfile$", "(^|/)Dockerfile\\.[^/]*$"],
+      "customType": "regex",
+      "fileMatch": [
+        "(^|/)Dockerfile$",
+        "(^|/)Dockerfile\\.[^/]*$"
+      ],
       "matchStrings": [
         "#\\srenovate:\\sdatasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?( extractVersion=(?<extractVersion>.*?))?\\s(ENV|ARG) .*?_VERSION(\\s+|=)(?<currentValue>.*)\\s"
       ],
@@ -17,8 +23,16 @@
   ],
   "packageRules": [
     {
-      "matchDatasources": ["docker", "github-releases", "github-tags"],
-      "matchUpdateTypes": ["patch", "minor", "major"],
+      "matchDatasources": [
+        "docker",
+        "github-releases",
+        "github-tags"
+      ],
+      "matchUpdateTypes": [
+        "patch",
+        "minor",
+        "major"
+      ],
       "enabled": true
     }
   ],
