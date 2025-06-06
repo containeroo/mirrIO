@@ -30,8 +30,8 @@ jobs:
 
       - name: Create test buckets
         run: |
-          mc admin bucket remote add minio1 http://localhost:9000 minio minio123
-          mc admin bucket remote add minio2 http://localhost:9001 minio minio123
+          mc config host add minio1 http://localhost:9000 minio minio123
+          mc config host add minio2 http://localhost:9001 minio minio123
           mc mb minio1/source
           mc mb minio2/destination
 
