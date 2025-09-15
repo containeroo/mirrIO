@@ -8,6 +8,4 @@ RUN wget -O /work/mc https://dl.min.io/client/mc/release/linux-amd64/mc && \
 
 ADD mirrio.sh /work/mirrio.sh
 
-RUN chmod +x /work/mirrio.sh
-
 ENTRYPOINT ["/work/mirrio.sh"]
