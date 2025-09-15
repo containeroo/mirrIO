@@ -6,8 +6,8 @@ ARG MINIO_VERSION=RELEASE.2023-10-14T01-57-03Z
 RUN wget -O /work/mc https://dl.min.io/client/mc/release/linux-amd64/mc && \
   chmod +x /work/mc
 
-ADD mirrio.sh /mirrio.sh
+ADD mirrio.sh /work/mirrio.sh
 
-RUN chmod +x /mirrio.sh
+RUN chmod +x /work/mirrio.sh
 
-ENTRYPOINT ["/mirrio.sh"]
+ENTRYPOINT ["/work/mirrio.sh"]
