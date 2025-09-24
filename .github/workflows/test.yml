@@ -57,3 +57,8 @@ jobs:
             -e SOURCE_BUCKET=source \
             -e DESTINATION_BUCKET=destination \
             test/mirrio
+
+      - name: Verify synced object
+        run: |
+          mc cp minio2/destination/test.txt destination.txt
+          diff -u test.txt destination.txt
