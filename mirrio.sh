@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
 set -o errexit
 set -o pipefail
+set -o nounset
 
 JOB_NAME=${JOB_NAME:-mirrIO}
 RETENTION=${RETENTION:-30d0h0m}
-ADDITIONAL_PARAMETERS=${ADDITIONAL_PARAMETERS:---quiet}
-MC_BINARY=${MC_BINARY:-/work/mc}
-MC_CONFIG_DIR=${MC_CONFIG_DIR:-/work/.mc}
-mkdir -p "$MC_CONFIG_DIR"
+ADDITIONAL_PARAMETERS=${ADDITIONAL_PARAMETERS:-}
 
-# mc wrapper to use config dir
-mc() { "$MC_BINARY" --config-dir "$MC_CONFIG_DIR" "$@"; }
+# Prefer MC_CONFIG_DIR if set, otherwise fall back to $HOME/.mc
+MC_CONFIG_DIR="${MC_CONFIG_DIR:-${HOME}/.mc}"
+mkdir -p "${MC_CONFIG_DIR}"
 
 pushgateway() {
   if [[ -n "${PUSHGATEWAY_URL:-}" ]]; then
@@ -25,7 +24,7 @@ EOF
 
 check_env() {
   for var in "$@"; do
-    if [[ -z "${!var}" ]]; then
+    if [[ -z "${!var:-}" ]]; then
       echo "${var} is not set!"
       exit 1
     fi
@@ -47,12 +46,15 @@ check_env \
   SOURCE_BUCKET \
   DESTINATION_BUCKET
 
+# If anything errors after here, mark failure + exit
 trap 'notify; exit 1' ERR
+trap 'notify; exit 1' SIGINT SIGTERM
 
 # Split extra parameters into an array so multiple flags work
 # shellcheck disable=SC2206
 read -r -a MC_MIRROR_ARGS <<<"${ADDITIONAL_PARAMETERS}"
 
+# Use env-based config dir (MC_CONFIG_DIR) — no wrapper / flag needed
 mc alias set source "${SOURCE_URL}" "${SOURCE_ACCESSKEY}" "${SOURCE_SECRETKEY}" --api S3v4
 mc alias set destination "${DESTINATION_URL}" "${DESTINATION_ACCESSKEY}" "${DESTINATION_SECRETKEY}" --api S3v4
 
