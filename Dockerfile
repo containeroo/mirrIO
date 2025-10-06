@@ -19,7 +19,7 @@ RUN chmod 0755 /usr/local/bin/mc
 RUN install -d -o 0 -g 0 -m 2775 /work/.mc \
   && ln -sfn /work/.mc /.mc
 
-# Drop to non-root (your base convention)
+# Drop to non-root
 ARG RUNTIME_USER=10001
 ARG RUNTIME_GROUP=0
 USER ${RUNTIME_USER}:${RUNTIME_GROUP}
