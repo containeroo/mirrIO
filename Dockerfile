@@ -3,7 +3,7 @@ FROM ghcr.io/containeroo/alpine-toolbox:3.0.0
 ENV HOME=/work \
   MC_CONFIG_DIR=/work/.mc
 
-# renovate: datasource=github-tags depName=minio/mc extractVersion=^RELEASE\\.(?<major>\\d+)-(?<minor>\\d+)-(?<patch>\\d+)T.*Z(-(?<compatibility>.*))?$
+# renovate: datasource=github-tags depName=minio/mc extractVersion=.*RELEASE\\.(?<major>\\d+)-(?<minor>\\d+)-(?<patch>\\d+)T.*Z(-(?<compatibility>.*))? versioning=loose
 ARG MINIO_VERSION=RELEASE.2025-08-13T08-35-41Z
 
 # App script
