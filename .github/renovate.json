@@ -6,6 +6,19 @@
   "labels": ["dependency"],
   "minimumReleaseAge": "1 day",
   "prCreation": "not-pending",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)Dockerfile$/",
+        "/(^|/)Dockerfile\\.[^/]*$/"
+      ],
+      "matchStrings": [
+        "#\\srenovate:\\sdatasource=(?<datasource>.*?) depName=(?<depName>.*?)"
+      ],
+      "versioningTemplate": "loose"
+    }
+  ],
   "packageRules": [
     {
       "matchDatasources": ["docker", "github-releases", "github-tags"],
