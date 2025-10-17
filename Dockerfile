@@ -1,4 +1,4 @@
-FROM ghcr.io/containeroo/alpine-toolbox:3.0.0
+FROM ghcr.io/containeroo/alpine-toolbox:3.1.1
 
 ENV HOME=/work \
   MC_CONFIG_DIR=/work/.mc
