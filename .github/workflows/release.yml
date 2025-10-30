@@ -13,7 +13,7 @@ jobs:
         with:
           fetch-depth: "0"
       - name: Build Changelog
-        uses: mikepenz/release-changelog-builder-action@v5
+        uses: mikepenz/release-changelog-builder-action@v6
         with:
           mode: "COMMIT"
           configurationJson: |
